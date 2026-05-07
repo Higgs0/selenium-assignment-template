@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group = 'selenium.assignment'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.13.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testImplementation 'org.assertj:assertj-core:3.25.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+
+    systemProperty 'browser.headless', System.getProperty('browser.headless', 'true')
+    systemProperty 'browser', System.getProperty('browser', 'chrome')
+
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
